@@ -1,5 +1,6 @@
-.local
-**/tmp
-**/log
-*.log
-*/documentation
+./*
+*/*
+!important/modules/dash
+!important/applications/views/extended_flow
+!important/out/extended_flow
+!importantREADME.md

@@ -1,1 +1,0 @@
-<h1>HERE IN TEST.TPL</h1>
