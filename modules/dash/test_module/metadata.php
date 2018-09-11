@@ -1,34 +1,34 @@
 <?php
+# Package information
 require __DIR__ . '/../vendormetadata.php';
+
+# Module description
 require_once 'metadata_description.php';
 
-/**
- * Metadata version
- */
+# Metadata version
 $sMetadataVersion = '1.0';
 
-/**
- * Module information
- */
 
 # Styles for description
 echo "<style>
-	.dash-red-font {
-		font-family: arial;
-		color: #f00;
-		font-weight: 900;
-		border: solid .1rem #f00;
-		display:inline-block;
-		padding:.5rem;
-	}
+.dash-red-font {
+	font-family: arial;
+	color: #f00;
+	font-weight: 900;
+	border: solid .1rem #f00;
+	display:inline-block;
+	padding:.5rem;
+}
 </style>";
 
+# Module ID
 $sID = basename(__DIR__);
 
-$aModule = array(
+# Module information
+$aModule = [
 	'id' => $sID,
-	'title' => "[$sPackage] Test Module",
-	'description' => array(
+	'title' => "[$sPackageName] Test Module",
+	'description' => [
 		# English
 		'en' => _description(
 			'This is an sample test module.',
@@ -45,41 +45,41 @@ $aModule = array(
 			['Auflistung #1','Auflistung #2','Letztes Auflistung'],
 			'SOGAR CSS!!!'
 		),
-	),
+	],
 	'version' => '1.0.0',
 	'author' => $sAuthor,
 	'email' => $sEmail,
 	'url' => $sUrl,
-	'extend' => array(
+	'extend' => [
         'start' => "$sPackage/$sID/application/controllers/test_controller",
-    ),
-	'blocks' => array(
-		array(
+    ],
+	'blocks' => [
+		[ # Extend: Shop -> Start -> Carousel
 			'template' => 'page/shop/start.tpl',
 			'block' => 'test_block',
 			'file' => '/application/views/blocks/overwrite_start.tpl',
-		),
-	),
-	'files' => array(
+		],
+	],
+	'files' => [
 		'test_service' => "$sPackage/$sID/service/my_service.php",
 		'test_menu' => "$sPackage/$sID/application/controllers/admin/test_menu.php",
-	),
-	'settings' => array(
-		array(
+	],
+	'settings' => [
+		[ # Display Text: String
 			'group' => 'main',
 			'name' => 'SETTING_DISPLAY_TEXT',
 			'type' => 'str',
 			'value' => 'Im a setting',
-		),
-		array(
+		],
+		[ # Display State: Boolean
 			'group' => 'main',
 			'name' => 'SETTING_DISPLAY_STATE',
 			'type' => 'bool',
 			'value' => 'true',
-		),
-	),
-	'events' => array(),
+		],
+	],
+	'events' => [],
 	'templates' => [
 		'own_admin_page.tpl' => "$sPackage/$sID/application/views/admin/own_admin_page.tpl",
 	],
-);
+];

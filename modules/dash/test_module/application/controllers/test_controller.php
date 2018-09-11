@@ -1,6 +1,6 @@
 <?php
 
-class test_module_test_controller extends test_module_test_controller_parent {
+class test_controller extends test_controller_parent {
 	public function render() {
 		$service = oxNew('test_service');
 		$settings = oxRegistry::get('oxConfig');
