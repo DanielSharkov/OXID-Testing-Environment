@@ -1,6 +1,6 @@
 <?php
 
-class display_volume_details extends display_volume_details_parent {
+class extend_details extends extend_details_parent {
 	/**
 	 * _getVolume
 	 * 

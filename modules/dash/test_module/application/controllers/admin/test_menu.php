@@ -1,7 +1,7 @@
 <?php
 
 class test_menu extends oxAdminView {
-	protected $_sThisTemplate  = 'test.tpl';
+	protected $_sThisTemplate  = 'own_admin_page.tpl';
 
 	public function run() {
 		// $data = json_decode(

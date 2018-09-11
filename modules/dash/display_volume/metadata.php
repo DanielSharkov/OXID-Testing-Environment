@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . '/../vendormetadata.php';
+
 /**
  * Metadata version
  */
@@ -7,19 +9,22 @@ $sMetadataVersion = '1.0';
 /**
  * Module information
  */
+
+$sID = basename(__DIR__);
+
 $aModule = array(
-	'id' => 'display_volume',
-	'title' => '[DaSh] Volume calc',
+	'id' => $sID,
+	'title' => "[$sPackage] Volume calc",
 	'description' => array(
 		'de' => 'Zeigt das berechnete Volumen des Artikels an.',
 		'en' => 'Shows the calculated volume of the product.',
 	),
 	'version' => '1.0.0',
-	'author' => '<a href="danielsharkov.com/about">Daniel Sharkov</a>',
-	'email' => 'daniel.scharkov@eod.de',
-	'url' => 'github.com/DanielSharkov/OXID-Testing-Environment',
+	'author' => $sAuthor,
+	'email' => $sEmail,
+	'url' => $sUrl,
 	'extend' => array(
-		'details' => 'dash/display_volume/application/controllers/extend_details',
+		'details' => "$sPackage/$sID/application/controllers/extend_details",
 	),
 	'blocks' => array(
 		array(

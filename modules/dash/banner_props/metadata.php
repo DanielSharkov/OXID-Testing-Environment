@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . '/../vendormetadata.php';
+
 /**
  * Metadata version
  */
@@ -7,31 +9,29 @@ $sMetadataVersion = '1.0';
 /**
  * Module information
  */
+
+$sID = basename(__DIR__);
+
 $aModule = [
-	'id' => 'banner_props',
-	'title' => '[DaSh] Banner Properties',
+	'id' => $sID,
+	'title' => "[$sPackage] Banner Properties",
 	'description' => [
 		'de' => 'Fügt hilfreiche Eigenschaften für Banner hinzu.',
 		'en' => 'Adds useful properties for the banner.',
 	],
 	'version' => '1.0.0',
-	'author' => '<a href="danielsharkov.com/about">Daniel Sharkov</a>',
-	'email' => 'daniel.scharkov@eod.de',
-	'url' => 'github.com/DanielSharkov/OXID-Testing-Environment',
+	'author' => $sAuthor,
+	'email' => $sEmail,
+	'url' => $sUrl,
 	'extend' => [],
 	'blocks' => [
 		[
 			'template' => 'actions_main.tpl',
 			'block' => 'admin_actions_main_form',
-			'file' => '/application/views/blocks/banner_props_actions_main.tpl',
+			'file' => '/application/views/blocks/extend_actions_main.tpl',
 		],
-	],
-	'files' => [
-		'test_menu' => 'dash/banner_props/application/controllers/admin/test_menu.php',
 	],
 	'settings' => [],
 	'events' => [],
-	'templates' => [
-		'own_admin_page.tpl' => 'dash/banner_props/application/views/admin/own_admin_page.tpl',
-	],
+	'templates' => [],
 ];
