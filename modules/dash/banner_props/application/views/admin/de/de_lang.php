@@ -5,5 +5,6 @@ $sLangName = 'Deutsch';
 $aLang = [
     'charset' => 'UTF-8',
 
-    'MY_OWN_INPUT' => 'Mein eigenes Textfeld',
+    'OX_BUTTON_COLOR' => 'Banner Knopffarbe',
+    'OX_BUTTON_LABEL' => 'Banner Knopftext',
 ];

@@ -27,6 +27,9 @@ $aModule = [
 	'email' => $sEmail,
 	'url' => $sUrl,
 	'extend' => [],
+	'files' => [
+		'banner_props_events' => "$sPackage/$sID/core/banner_props_events.php",
+	],
 	'blocks' => [
 		[ # Extend: Adminpanel -> Customer Info -> Promotions -> Inputs
 			'template' => 'actions_main.tpl',
@@ -35,6 +38,9 @@ $aModule = [
 		],
 	],
 	'settings' => [],
-	'events' => [],
+	'events' => [
+		'onActivate' => 'banner_props_events::onActivate',
+		'onDeactivate' => 'banner_props_events::onDeactivate',
+	],
 	'templates' => [],
 ];
