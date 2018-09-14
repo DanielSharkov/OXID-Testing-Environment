@@ -28,13 +28,18 @@ $aModule = [
 	'url' => $sUrl,
 	'extend' => [],
 	'files' => [
-		'banner_props_events' => "$sPackage/$sID/core/banner_props_events.php",
+		'banner_props_events' => "$sPackage/$sID/core/banner_props_events.php",	
 	],
 	'blocks' => [
 		[ # Extend: Adminpanel -> Customer Info -> Promotions -> Inputs
 			'template' => 'actions_main.tpl',
 			'block' => 'admin_actions_main_form',
 			'file' => '/application/views/blocks/extend_actions_main.tpl',
+		],
+		[ # Extend: Shop -> Startpage -> Promotion slider
+			'template' => 'widget/promoslider.tpl',
+			'block' => 'dd_widget_promoslider',
+			'file' => '/application/views/blocks/extend_promoslider.tpl',
 		],
 	],
 	'settings' => [],
