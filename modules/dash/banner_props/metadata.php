@@ -44,7 +44,9 @@ $aModule = [
 	],
 	'settings' => [],
 	'events' => [
+		# Init database
 		'onActivate' => 'banner_props_events::onActivate',
+		# Reset database to default
 		'onDeactivate' => 'banner_props_events::onDeactivate',
 	],
 	'templates' => [],

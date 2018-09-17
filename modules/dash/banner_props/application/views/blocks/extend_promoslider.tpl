@@ -1,20 +1,94 @@
 [{assign var="oBanners" value=$oView->getBanners()}]
-[{assign var="currency" value=$oView->getActCurrency()}]
 
 <style>
+/* Single banner */
 #promo-carousel .item {
 	display: flex !important;
 	align-items: center;
 	justify-content: center;
 }
+
+/* Banner info */
 .banner-info {
 	position: absolute;
-	left: 10rem;
-	bottom: 6rem;
+	display: flex;
+	flex-flow: row wrap;
+	filter: drop-shadow(0 0 4px rgba(0,0,0,.5));
 }
+/* Banner title */
 .banner-info h1 {
 	color: #fff;
+	flex: 1 1 100%;
 }
+
+/* Banner info alignments */
+/* Left alignments */
+.banner-info.left_top {
+	top: 2rem;
+	left: 8rem;
+	justify-content: flex-start;
+}
+.banner-info.left_centered {
+	align-self: center;
+	left: 8rem;
+	justify-content: flex-start;
+}
+.banner-info.left_bottom {
+	bottom: 4rem;
+	left: 8rem;
+	justify-content: flex-start;
+}
+.banner-info.left_top > h1,
+.banner-info.left_centered > h1,
+.banner-info.left_bottom > h1 {
+	text-align: left;
+}
+
+/* Right alignments */
+.banner-info.right_top {
+	top: 2rem;
+	right: 8rem;
+	justify-content: flex-end;
+}
+.banner-info.right_centered {
+	align-self: center;
+	right: 8rem;
+	justify-content: flex-end;
+}
+.banner-info.right_bottom {
+	bottom: 4rem;
+	right: 8rem;
+	justify-content: flex-end;
+}
+.banner-info.right_top > h1,
+.banner-info.right_centered > h1,
+.banner-info.right_bottom > h1 {
+	text-align: right;
+}
+
+/* Middle alignments */
+.banner-info.top_centered {
+	top: 2rem;
+	justify-self: center;
+	justify-content: center;
+}
+.banner-info.centered {
+	align-self: center;
+	justify-self: center;
+	justify-content: center;
+}
+.banner-info.bottom_centered {
+	bottom: 4rem;
+	justify-self: center;
+	justify-content: center;
+}
+.banner-info.top_centered > h1,
+.banner-info.centered > h1,
+.banner-info.bottom_centered > h1 {
+	text-align: center;
+}
+
+/* Banner button */
 .banner-info .banner-button {
 	padding: 1rem 4rem;
 	border-radius: .5rem;
@@ -36,7 +110,7 @@
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	background-color: rgba(0,0,0,.1);
+	background-color: rgba(0,0,0,.2);
 }
 </style>
 
@@ -52,7 +126,7 @@
 					[{assign var="sBannerPictureUrl" value=$oBanner->getBannerPictureUrl()}]
 					[{if $sBannerPictureUrl}]
 						<li class="item">
-							<div class="banner-info">
+							<div class="banner-info [{$oBanner->oxactions__ox_banner_info_align->value}]">
 								<h1 style="color: [{$oBanner->oxactions__ox_button_color->value}]">
 									[{$oBanner->oxactions__oxtitle->value}]
 								</h1>

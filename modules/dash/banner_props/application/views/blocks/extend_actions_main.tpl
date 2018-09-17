@@ -1,6 +1,8 @@
-[{*$smarty.block.parent*}]
+[{$smarty.block.parent}]
 [{assign var="buttonColor" value=$edit->oxactions__ox_button_color}]
 [{assign var="buttonLabel" value=$edit->oxactions__ox_button_label}]
+[{assign var="bannerInfoAlign" value=$edit->oxactions__ox_banner_info_align}]
+
 <style>
 #button-preview {
 	display: flex;
@@ -14,6 +16,7 @@
 	border-color: [{$buttonColor->value}];
 	color: [{$buttonColor}];
 	border-radius: .2rem;
+	filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
 }
 #button-preview-label {
 	font-size: 1rem;
@@ -21,14 +24,37 @@
 </style>
 
 <script>
-function changeColor(el) {
+function changeColor(val) {
 	let preview = document.getElementById('button-preview')
-	preview.style.borderColor = el.value
-	preview.style.color = el.value
+	preview.style.borderColor = val
+	preview.style.color = val
 }
-function changeLabel(el) {
+
+function changeLabel(val) {
 	let label = document.getElementById('button-preview-label')
-	label.innerText = el.value
+	if (val.length > 0) {
+		label.innerText = val
+		return
+	}
+	setDefaultButtonLabel(val)
+}
+
+function setDefaultButtonLabel(val) {
+	if (val.length < 1) {
+		let preview = document.getElementById('button-preview-label')
+		preview.innerText = '[{oxmultilang ident="BUTTON_TEXT_PREVIEW_EMPTY"}]'
+	}
+}
+
+function setDefaultAlignment() {
+	let alignment = '[{$bannerInfoAlign->value}]'
+	if (alignment.length > 0) {
+		document.getElementById(
+			'align-' + alignment,
+		).setAttribute(
+			'selected', true,
+		)
+	}
 }
 </script>
 
@@ -48,9 +74,9 @@ function changeLabel(el) {
 			name="editval[oxactions__ox_button_color]"
 			value="[{$buttonColor->value}]"
 			[{$readonly}]
-			oninput="changeColor(this)"
+			oninput="changeColor(this.value)"
+			id="ox_button_color"
 		/>
-		[{*oxinputhelp ident="HELP_GENERAL_NAME"*}]
 	</td>
 </tr>
 <tr>
@@ -66,101 +92,55 @@ function changeLabel(el) {
 			name="editval[oxactions__ox_button_label]"
 			value="[{$buttonLabel->value}]"
 			[{$readonly}]
-			oninput="changeLabel(this)"
+			oninput="changeLabel(this.value)"
+			id="ox_button_label"
 		/>
-		[{*oxinputhelp ident="HELP_GENERAL_NAME"*}]
-	</td>
-</tr>
-
-<tr>
-	<td class="edittext" width="120">
-		[{oxmultilang ident="GENERAL_NAME"}]
-	</td>
-	<td class="edittext">
-		<input
-			type="text"
-			class="editinput"
-			size="32"
-			maxlength="[{$edit->oxactions__oxtitle->fldmax_length}]"
-			name="editval[oxactions__oxtitle]"
-			value="[{$edit->oxactions__oxtitle->value}]"
-			[{$readonly}]
-			[{$disableSharedEdit}]
-		/>
-		[{oxinputhelp ident="HELP_GENERAL_NAME"}]
 	</td>
 </tr>
 <tr>
 	<td class="edittext" width="120">
-		[{if $edit->oxactions__oxtype->value != 2}]
-			[{oxmultilang ident="GENERAL_ALWAYS_ACTIVE"}]
-		[{else}]
-			[{oxmultilang ident="GENERAL_ACTIVE"}]
-		[{/if}]
+		[{oxmultilang ident="OX_BANNER_INFO_ALIGN"}]
 	</td>
 	<td class="edittext">
-		<input
-			class="edittext"
-			type="checkbox"
-			name="editval[oxactions__oxactive]"
-			value='1'
-			[{if $edit->oxactions__oxactive->value == 1}]checked[{/if}]
-			[{$readonly}]
-		/>
-		[{oxinputhelp ident="HELP_GENERAL_ACTIVE"}]
-	</td>
-</tr>
-<tr>
-	<td class="edittext">
-		[{if $edit->oxactions__oxtype->value != 2}]
-			[{oxmultilang ident="GENERAL_ACTIVFROMTILL"}]
-		[{/if}]&nbsp;
-	</td>
-	<td class="edittext" align="right">
-		[{oxmultilang ident="GENERAL_FROM"}]
-		<input
-			type="text"
-			class="editinput"
-			size="27"
-			name="editval[oxactions__oxactivefrom]"
-			value="[{$edit->oxactions__oxactivefrom|oxformdate}]"
-			[{include file="help.tpl" helpid=article_vonbis}]
-			[{$readonly}]
-		/>
-		<br>
-		[{oxmultilang ident="GENERAL_TILL"}]
-		<input
-			type="text"
-			class="editinput"
-			size="27"
-			name="editval[oxactions__oxactiveto]"
-			value="[{$edit->oxactions__oxactiveto|oxformdate}]"
-			[{include file="help.tpl" helpid=article_vonbis}]
-			[{$readonly}]
-		/>
-		[{if $edit->oxactions__oxtype->value != 2}]
-			[{oxinputhelp ident="HELP_GENERAL_ACTIVFROMTILL"}]
-		[{/if}]
-	</td>
-</tr>
-
-[{if $oxid == "-1"}]
-	<tr>
-		<td class="edittext">
-			[{oxmultilang ident="GENERAL_TYPE"}]&nbsp;
-		</td>
-		<td class="edittext">
-		<select class="editinput" name="editval[oxactions__oxtype]">
-			<option value="1">
-				[{oxmultilang ident="PROMOTIONS_MAIN_TYPE_ACTION"}]
+		<select
+		id="ox_banner_info_align"
+		name="editval[oxactions__ox_banner_info_align]">
+			<option value="left_top" id="align-left_top">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_LEFT_TOP"}]
 			</option>
-			<option value="2">
-				[{oxmultilang ident="PROMOTIONS_MAIN_TYPE_PROMO"}]
+			<option value="left_centered" id="align-left_centered">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_LEFT_CENTERED"}]
 			</option>
-			<option value="3">
-				[{oxmultilang ident="PROMOTIONS_MAIN_TYPE_BANNER"}]
+			<option value="left_bottom" id="align-left_bottom">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_LEFT_BOTTOM"}]
+			</option>
+			<option value="right_top" id="align-right_top">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_RIGHT_TOP"}]
+			</option>
+			<option value="right_centered" id="align-right_centered">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_RIGHT_CENTERED"}]
+			</option>
+			<option value="right_bottom" id="align-right_bottom">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_RIGHT_BOTTOM"}]
+			</option>
+			<option value="top_centered" id="align-top_centered">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_TOP_CENTERED"}]
+			</option>
+			<option value="centered" id="align-centered">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_CENTERED"}]
+			</option>
+			<option value="bottom_centered" id="align-bottom_centered">
+				[{oxmultilang ident="OX_BANNER_INFO_ALIGN_BOTTOM_CENTERED"}]
 			</option>
 		</select>
-		</td>
-	</tr>
-[{/if}]
+	</td>
+</tr>
+
+<script>
+// Set default text for button label in preview
+// if the input of button input is empty
+setDefaultButtonLabel(document.getElementById('ox_button_label').value)
+
+// Sets the alignment to default value if alignment is not chosen
+setDefaultAlignment()
+</script>

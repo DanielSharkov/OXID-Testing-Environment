@@ -6,23 +6,73 @@ class banner_props_events {
 		# Adjusts the views in the database to this module
 		$oDb = oxDb::getDb();
 
+		# Check if column "OX_BUTTON_COLOR" is already initialized in table "oxactions"
+		$btnColor = $oDb->getOne(
+			'SHOW COLUMNS FROM `oxactions` LIKE "OX_BUTTON_COLOR";'
+		);
+		# Initialize column when column is not defined
+		if (empty($btnColor)) {
+			$oDb->getOne(
+				"ALTER TABLE oxactions
+					ADD OX_BUTTON_COLOR
+						CHAR(255)
+						NOT NULL
+						DEFAULT '#fff'
+						COMMENT 'Color of the button in the banner info'"
+			);
+		}
+
+		# Check if column "OX_BUTTON_LABEL" is already initialized in table "oxactions"
+		$btnLabel = $oDb->getOne(
+			'SHOW COLUMNS FROM `oxactions` LIKE "OX_BUTTON_LABEL";'
+		);
+		# Initialize column when column is not defined
+		if (empty($btnLabel)) {
+			$oDb->getOne(
+				"ALTER TABLE oxactions
+					ADD OX_BUTTON_LABEL
+						CHAR(255)
+						COMMENT 'Label of the button in the banner info'"
+			);
+		}
+
+		# Check if column "OX_BANNER_INFO_ALIGN" is already initialized in table "oxactions"
+		$infoAlign = $oDb->getOne(
+			'SHOW COLUMNS FROM `oxactions` LIKE "OX_BANNER_INFO_ALIGN";'
+		);
+		# Initialize column when column is not defined
+		if (empty($infoAlign)) {
+			$oDb->getOne(
+				"ALTER TABLE oxactions
+					ADD OX_BANNER_INFO_ALIGN
+						ENUM(
+							'left_top', 'left_centered', 'left_bottom',
+							'right_top', 'right_centered', 'right_bottom',
+							'top_centered', 'centered', 'bottom_centered'
+						)
+						NOT NULL
+						DEFAULT 'left_bottom'
+						COMMENT 'Alignment of the banner info'"
+			);
+		}
+
 		# Adjust oxactions_de view to this module
-		$test = $oDb->getOne(
+		$oDb->getOne(
 			'ALTER VIEW tes.oxv_oxactions_de AS SELECT '.
 				'OXID, OXSHOPID, OXTYPE, OXTITLE, OXLONGDESC, '.
 				'OXACTIVE, OXACTIVEFROM, OXACTIVETO, OXPIC, '.
 				'OXLINK, OXSORT, OXTIMESTAMP, OX_BUTTON_COLOR, '.
-				'OX_BUTTON_LABEL'.
+				'OX_BUTTON_LABEL, OX_BANNER_INFO_ALIGN'.
 			' FROM oxactions'
 		);
 		# Adjust oxactions_en view to this module
-		$test2 = $oDb->getOne(
+		$oDb->getOne(
 			'ALTER VIEW tes.oxv_oxactions_en AS SELECT '.
 				'OXID, OXSHOPID, OXTYPE, OXTITLE_1 AS OXTITLE, '.
 				'OXLONGDESC_1 AS OXLONGDESC, OXACTIVE, '.
 				'OXACTIVEFROM, OXACTIVETO, OXPIC_1 AS OXPIC, '.
 				'OXLINK_1 AS OXLINK, OXSORT, OXTIMESTAMP, '.
-				'OX_BUTTON_COLOR, OX_BUTTON_LABEL'.
+				'OX_BUTTON_COLOR, OX_BUTTON_LABEL, OX_BANNER_INFO_ALIGN'.
 			' FROM oxactions'
 		);
 
@@ -55,19 +105,26 @@ class banner_props_events {
 
 	# onDeactivate
 	public static function onDeactivate() {
-		# Resets the views in the database to default
 		$oDb = oxDb::getDb();
 	
-		# Alter oxactions_de view back to default
-		$test = $oDb->getOne(
+		// # Drop columns in table oxactions
+		// $oDb->getOne(
+		// 	'ALTER TABLE ox_oxactions DROP COLUMN '.
+		// 		'OX_BUTTON_COLOR, '.
+		// 		'OX_BUTTON_LABEL, '.
+		// 		'OX_BANNER_INFO_ALIGN'
+		// );
+
+		# Reset oxactions_de view back to default
+		$oDb->getOne(
 			'ALTER VIEW tes.oxv_oxactions_de AS SELECT '.
 				'OXID, OXSHOPID, OXTYPE, OXTITLE, OXLONGDESC, '.
 				'OXACTIVE, OXACTIVEFROM, OXACTIVETO, OXPIC, '.
 				'OXLINK, OXSORT, OXTIMESTAMP'.
 			' FROM oxactions'
 		);
-		# Alter oxactions_en view back to default
-		$test2 = $oDb->getOne(
+		# Reset oxactions_en view back to default
+		$oDb->getOne(
 			'ALTER VIEW tes.oxv_oxactions_en AS SELECT '.
 				'OXID, OXSHOPID, OXTYPE, OXTITLE_1 AS OXTITLE, '.
 				'OXLONGDESC_1 AS OXLONGDESC, OXACTIVE, '.
