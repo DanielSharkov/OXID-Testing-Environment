@@ -1,0 +1,700 @@
+// IMPORTS ---------------------------------------------------------------------
+	@import 'global_variables'
+
+	@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700')
+	@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i')
+
+// INITIALISE / MAIN CONFIG ----------------------------------------------------
+	// Clear elements
+	div, input, button, textarea,
+	span, a, p, q, b, i, label,
+	h1, h2, h3, h4, h5, h6
+		margin: 0
+		padding: 0
+		border: none
+		background: none
+		outline: none
+		$Transition(all $OutCubic 200ms)
+		-webkit-box-sizing: border-box
+		-moz-box-sizing: border-box
+		-o-box-sizing: border-box
+		box-sizing: border-box
+		&:before, &:after
+			margin: 0
+			padding: 0
+			border: none
+			background: none
+			outline: none
+			$Transition(all $OutCubic 200ms)
+			-webkit-box-sizing: border-box
+			-moz-box-sizing: border-box
+			-o-box-sizing: border-box
+			box-sizing: border-box
+
+	html
+		position: relative
+		height: 100vh
+		width: 100vw
+		margin: 0
+		padding: 0
+		overflow: hidden
+		background: none
+		body
+			position: @position
+			height: @height
+			width: @width
+			margin: 0
+			padding: 0
+			font-size: 0
+			$Transition(none)
+			overflow: @overflow
+			background: none
+		#app
+			position: @position
+			$DisplayFlex()
+			height: @height
+			width: @width
+			margin: 0
+			padding: 0
+			z-index: 1
+			overflow: auto
+			overflow-x: hidden
+			align-items: flex-start
+			line-height: 1.5
+			font-family: 'Montserrat', sans-serif
+			-moz-osx-font-smoothing: subpixel-antialiased
+			-webkit-font-smoothing: subpixel-antialiased
+			flex-flow: row wrap
+
+	#lock-bg
+		position: fixed
+		height: 100vh
+		width: 100vw
+		background-color: #000
+		pointer-events: none
+		z-index: 44
+		opacity: 0
+		$Transition(opacity $OutCubic 300ms)
+		&[active]
+			pointer-events: auto
+
+	#scroll-up
+		position: fixed
+		right: .5rem
+		bottom: @right
+		z-index: 10
+		transform: translate(0, 100%)
+		$Transition(transform $OutCubic 200ms)
+		&[show]
+			transform: translate(0, 0)
+
+	.background
+		position: absolute
+		top: 0
+		left: 0
+		height: 100%
+		width: 100%
+		&-image
+			position: @position
+			top: @top
+			left: @left
+			height: @height
+			width: @width
+			$CenterBGImage()
+
+	[lockScroll]
+		overflow: hidden !important
+
+	.non-selectable
+		$TextSelect(none)
+
+	.center-content
+		$DisplayFlex()
+		$AlignContent(center)
+
+	.page
+		$DisplayFlex()
+		height: auto
+		width: 100%
+		margin: 4rem auto
+		flex-flow: row wrap
+		justify-content: center
+		$Transition(none)
+		z-index: 1
+		> *
+			flex: 1 1 100%
+
+	.ripple-container
+		$SmoothAnimation()
+		position: absolute
+		top: 0
+		left: 0
+		height: 0
+		width: 0
+		pointer-events: none
+		overflow: hidden
+		.ripple-effect
+			$SmoothAnimation()
+			position: relative
+			height: 0
+			width: 0
+			transform: translate(0, 0)
+			pointer-events: none
+			border-radius: 50%
+
+	.icon
+		$DisplayFlex()
+		$AlignContent(center)
+		$TextSelect(none)
+		font-size: 1.25rem
+		&.fab, &.fas, &.far
+			&:before, &:after
+				padding: .15rem
+				font-size: 1rem
+				line-height: 1
+
+	hr
+		height: 1px
+		width: calc(100% - 4rem)
+		margin: 2rem
+		border: none
+		border-radius: $BasicRadius
+		flex: calc(100rem - 4rem)
+
+// THEME CONFIG ----------------------------------------------------------------
+	// Page background
+		.theme-light
+			background-color: $LightThemeBG
+		.theme-dark
+			background-color: $DarkThemeBG
+
+	// Text select
+		.theme-light
+			::selection
+				background-color: rgba($DarkThemeBG, .85)
+				color: $LightThemeBG
+				text-decoration-color: $LightThemeBG
+			::-moz-selection
+				background-color: rgba($DarkThemeBG, .85)
+				color: $LightThemeBG
+				text-decoration-color: $LightThemeBG
+		.theme-dark
+			::selection
+				background-color: rgba($BlueGreyWhite, .85)
+				color: $DarkThemeBG
+				text-decoration-color: $DarkThemeBG
+			::-moz-selection
+				background-color: rgba($BlueGreyWhite, .85)
+				color: $DarkThemeBG
+				text-decoration-color: $DarkThemeBG
+
+	// Font
+		.theme-light
+			span, input, button, a, q, p, b,
+			pre, code, i, textarea, .monospace, label
+				color: $FontColorDark
+				> *
+					color: @color
+			input, button, a, textarea,
+			h1, h2, h3, h4, h5, h6, .heading
+				color: $FontColorDark
+				> *
+					color: @color
+		.theme-dark
+			span, input, button, a, q, p, b,
+			pre, code, i, textarea, .monospace, label
+				color: $FontColorLight
+				> *
+					color: @color
+			input, button, a, textarea,
+			h1, h2, h3, h4, h5, h6, .heading
+				color: $FontColorLight
+				> *
+					color: @color
+
+	// Breakline
+		.theme-light
+			hr, .divider
+				background-color: $DividerDark
+		.theme-dark
+			hr, .divider
+				background-color: $DividerLight
+
+		// Sidenav toggle icon
+		.theme-light
+			.burger-menu .icon
+				background-color: $BlueGrey
+				&:before, &:after
+					background-color: @background-color
+		.theme-dark
+			.burger-menu .icon
+				background-color: $BlueGreyWhite
+				&:before, &:after
+					background-color: @background-color
+
+		// Ripple effect
+		.theme-light
+			.ripple-container .ripple-effect
+				background-color: #000
+		.theme-dark
+			.ripple-container .ripple-effect
+				background-color: #fff
+
+	// Cards
+		.theme-light
+			.card, .cards > *
+				background-color: #fff
+				$DropShadow(1, 'light')
+			.card
+				&.hoverable, &.clickable
+					&:hover
+						$DropShadow(5, 'light')
+				&.clickable
+					&:active, &:focus
+						$DropShadow(10, 'light')
+			.cards
+				&.hoverable, &.clickable
+					> *:hover
+						$DropShadow(5, 'light')
+				&.clickable > *
+					&:active, &:focus
+						$DropShadow(10, 'light')
+		.theme-dark
+			.card, .cards > *
+				background-color: $DarkThemeBGContrast
+				$DropShadow(1, 'dark')
+			.card
+				&.hoverable, &.clickable
+					&:hover
+						$DropShadow(5, 'dark')
+						background-color: $DarkThemeBGContrastBright
+				&.clickable
+					&:active, &:focus
+						$DropShadow(10, 'dark')
+						background-color: $DarkThemeBGBrigher
+			.cards
+				&.hoverable, &.clickable
+					> *:hover
+						$DropShadow(5, 'dark')
+						background-color: $DarkThemeBGContrastBright
+				&.clickable
+					> *:focus
+						$DropShadow(10, 'dark')
+						background-color: $DarkThemeBGBrigher
+
+	// When ui button is active
+		.theme-light
+			.butn[active] .ripple-container .ripple-effect
+				background-color: #fff
+		.theme-dark
+			.butn[active] .ripple-container .ripple-effect
+				background-color: #000
+
+		// Code blocks
+		.theme-light
+			code
+				background-color: $BlueGreyWhite
+		.theme-dark
+			code
+				background-color: $DarkThemeBGContrast
+
+	// Shadows
+		.theme-light
+			for stage in (1..25)
+				.drop-shadow-{stage}
+					$DropShadow(stage, 'light')
+		.theme-dark
+			for stage in (1..25)
+				.drop-shadow-{stage}
+					$DropShadow(stage, 'dark')
+
+	// Scroll up button
+		.theme-dark
+			#scroll-up .butn
+				color: $BasicColorDarkMode
+				background-color: $DarkThemeBGContrastBright
+				.background
+					background-color: #fff
+
+// TEXT FORMATING --------------------------------------------------------------
+	span, input, button, a, q, .qoute, p, b, .bold
+	pre, code, i, textarea, .monospace, tt,
+	strike, mark, u, .underline, strike, .strike
+		$DefaultFW()
+		font-size: $BasicFS
+		&.primary1
+			color: $primary
+		&.primary2
+			color: $primary2
+
+	span, input, button, a, q, p, b,
+	pre, code, i, textarea, .monospace, label
+		$SmoothAnimation()
+
+	span, input, q, p, b,
+	pre, code, i, .monospace, label
+		$Transition(none)
+
+	tt, .monospace
+		display: inherit
+		font-family: 'Inconsolata', monospace
+		$BoldFW()
+
+	code
+		position: relative
+		display: block
+		margin: 1rem
+		padding: 1rem
+		border-radius: $BasicRadius
+		overflow: auto
+		font-family: 'Inconsolata', monospace
+		$BoldFW()
+		white-space: pre-wrap
+		-moz-tab-size: 2rem
+		-o-tab-size: 2rem
+		tab-size: 2rem
+		&:before
+			content: '<code/>'
+			position: absolute
+			top: 0
+			right: 0
+			display: inline-block
+			padding: .25rem .5rem
+			font-size: .75rem
+			border-bottom-left-radius: .2rem
+			pointer-events: none
+			background-color: inherit
+
+	.thin-font
+		$ThinFW()
+		> *
+			$ThinFW()
+	.light-font
+		$LightFW()
+		> *
+			$LightFW()
+	.default-font
+		$DefaultFW()
+		> *
+			$DefaultFW()
+	.medium-font
+		$MediumFW()
+		> *
+			$MediumFW()
+	.bold-font
+		$BoldFW()
+		> *
+			$BoldFW()
+	.bolder-font
+		$BolderFW()
+		> *
+			$BolderFW()
+
+	p, .paragraph
+		margin-top: .5rem
+		flex: 0 0 auto
+
+	i, .italic
+		font-style: italic
+
+	b, .bold
+		$BoldFW()
+
+	q, .quote
+		font-style: italic
+		padding-left: .25rem
+		opacity: .5
+		&:before
+			content: open-quote
+		&:after
+			content: close-quote
+		&:before
+			position: relative
+			top: .6rem
+			right: .15rem
+
+	u, .underline
+		text-decoration: underline
+	.underline
+		&-dashed
+			text-decoration: underline
+			text-decoration-style: dashed
+		&-dotted
+			text-decoration: underline
+			text-decoration-style: dotted
+		&-wavy
+			text-decoration: underline
+			text-decoration-style: wavy
+
+	strike, .strike
+		opacity: .5
+		text-decoration: line-through
+
+	.theme-light, .theme-dark
+		mark, .mark
+			background-color: rgba($YellowLight, .75)
+			color: $FontColorDark
+
+	a.link
+		position: relative
+		cursor: pointer
+		text-decoration: none
+		$TextSelect(none)
+		&:before
+			$SmoothAnimation()
+			content: ''
+			position: absolute
+			left: 0
+			display: inline-block
+			height: 100%
+			width: 0
+			border-bottom: solid .1rem
+			border-color: inherit
+			$Transition(width $OutCubic 300ms)
+		> *
+			color: inherit
+		&:hover, &:active, &:focus
+			&:before
+				width: 100%
+				$TransitionDuration(100ms)
+		&.blue
+			color: $Blue
+			&:before
+				border-color: $Blue
+
+	a, q, .qoute, b, .bold, i, .italic
+		&.adapt-to-text
+			margin: 0 .25rem
+
+	.heading,
+	h1, .heading-1, h2, .heading-2, h3, .heading-3,
+	h4, .heading-4, h5, .heading-5, h6, .heading-6
+		text-align: center
+		$SemiBoldFW()
+
+	h1, .heading-1 {} font-size: $HeadingFS1 }
+	h2, .heading-2 {} font-size: $HeadingFS2 }
+	h3, .heading-3 {} font-size: $HeadingFS3 }
+	h4, .heading-4 {} font-size: $HeadingFS4 }
+	h5, .heading-5 {} font-size: $HeadingFS5 }
+	h6, .heading-6 {} font-size: $HeadingFS6 }
+
+	.display
+		&-1 { font-size: $DisplayFS1; font-weight: 200 }
+		&-2 { font-size: $DisplayFS2; font-weight: 200 }
+		&-3 { font-size: $DisplayFS3; font-weight: 200 }
+		&-4 { font-size: $DisplayFS4; font-weight: 200 }
+
+	.subtitle
+		position: relative
+		color: rgb(225, 225, 225)
+		line-height: 1
+		$DefaultFW()
+		&-1
+			font-size: ($HeadingFS1 * .65)
+			top: -(@font-size * .15)
+			opacity: .5
+		&-2
+			font-size: ($HeadingFS2 * .65)
+			top: -(@font-size * .15)
+			opacity: .5
+		&-3
+			font-size: ($HeadingFS3 * .65)
+			top: -(@font-size * .15)
+			opacity: .5
+		&-4
+			font-size: ($HeadingFS4 * .65)
+			top: -(@font-size * .15)
+			opacity: .5
+		&-5
+			font-size: ($HeadingFS5 * .65)
+			top: -(@font-size * .15)
+			opacity: .5
+		&-6
+			font-size: ($HeadingFS6 * .65)
+			top: -(@font-size * .15)
+			opacity: .5
+
+// GRID ------------------------------------------------------------------------
+	.grid
+		$DisplayFlex()
+		flex-flow: row wrap
+		align-items: center
+		> *
+			flex: 0 0 auto
+		&.center-content
+			$AlignContent(center)
+		&.flex-start-content
+			$AlignContent(flex-start)
+		&.flex-end-content
+			$AlignContent(flex-end)
+		&.adjust-content
+			flex-grow: 1
+			flex-shrink: 1
+		&.single, > *.single
+			flex: 0 0 100%
+		&.half, > *.half
+			flex: 0 0 50%
+		&.third, > *.third
+			flex: 0 0 calc(100% / 3)
+		&.fourth, > *.fourth
+			flex: 0 0 25%
+		&.fifth, > *.fifth
+			flex: 0 0 20%
+		&.sixth, > *.sixth
+			flex: 0 0 calc(100% / 6)
+		&.stretch
+			flex: 1 1 100%
+
+// Cards -----------------------------------------------------------------------
+	.card, .cards > *
+		padding: 1rem
+		z-index: 2
+		overflow: auto
+		border-radius: $BasicRadius
+	.card
+		&.hoverable, &.clickable
+			transform: scale(1)
+			$SmoothAnimation()
+		&.hoverable:hover
+			transform: scale(1.03)
+			z-index: 3
+		&.clickable
+			cursor: pointer
+			&:hover
+				transform: scale(1.03)
+				z-index: 3
+			&:active, &:focus
+				transform: scale(1.06)
+				z-index: 3
+	.cards
+		&.hoverable, &.clickable
+			> *
+				transform: scale(1)
+				$SmoothAnimation()
+		&.hoverable > *:hover
+			transform: scale(1.03)
+			z-index: 3
+		&.clickable > *
+			cursor: pointer
+			&:hover
+				transform: scale(1.03)
+				z-index: 3
+			&:active, &:focus
+				transform: scale(1.06)
+				z-index: 3
+
+// DEBUGGING -------------------------------------------------------------------
+	.layout-boundaries *
+		outline: solid 1px $Purple !important
+	#layout-boundaries
+		position: absolute
+		top: 0
+		right: 0
+		padding: 1rem
+		cursor:	 pointer
+		z-index: 100
+		&:hover .far
+			color: $primary
+
+
+
+// -----------------------------------------------------------------------------
+// SHOP ------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+	@media (min-width:768px)
+		.navbar-collapse.collapse
+			display: flex !important
+
+	.btn-group, .btn-group-vertical
+		position: relative
+
+	.btn-group
+		> .btn.dropdown-toggle
+			margin: .5rem
+			padding: .5rem 1rem
+			border-radius: .2rem
+
+	> .btn, .btn-group-vertical > .btn
+		&:hover, &:focus, &:active, &.active
+			z-index: 2
+			background-color: rgba(#000, .05)
+
+	.btn-group.open
+		.dropdown-toggle
+			background-color: rgb(0,125,255)
+			color: #fff
+			> *
+				color: #fff
+
+	.btn
+		border-radius: .2rem
+		&:hover
+			background-color: rgba(#000, .05)
+		&:active, &.active
+			color: #fff
+			background-color: rgb(0,125,255)
+			> *
+				color: #fff
+		&:focus:not(.active)
+			color: rgb(0,125,255)
+			background-color: rgba(0,125,255, .3)
+			> *
+				color: rgb(0,125,255)
+
+	.dropdown-menu
+		position: absolute
+		top: 100%
+		z-index: 50
+		min-width: 160px
+		background-color: #fff
+		border-radius: $BasicRadius
+		box-shadow:
+			0 10px 50px rgba(#000, .1),
+			0 1px 4px rgba(#000, .1)
+		overflow: hidden
+		opacity: 0
+		pointer-events: none
+		a
+			padding: .5rem 1rem
+			flex: 1 1 100%
+			text-decoration: none
+			&:hover
+				background-color: rgba(#000, .05)
+			&.active
+				color: #fff
+				background-color: rgb(0,125,255)
+				> *
+					color: #fff
+			&:focus:not(.active)
+				color: rgb(0,125,255)
+				background-color: rgba(0,125,255, .3)
+				> *
+					color: rgb(0,125,255)
+			.disabled, [disabled]
+				opaciy: .3
+				pointer-events: none
+				cursor: not-allowed
+		&.expand-left-down
+			transform-origin: right top
+			transform: scale(.85)
+		&.expand-down
+			transform-origin: top
+			transform: scaleY(.75)
+
+	.open > .dropdown-menu
+		opacity: 1
+		pointer-events: all
+		&.expand-left-down
+			transform: scale(1)
+		&.expand-down
+			transform: scaleY(1)
+	
+	.align-right
+		right: 0
+	.align-left
+		left: 0
+	.align-right-top
+		right: 0
+		top: 0

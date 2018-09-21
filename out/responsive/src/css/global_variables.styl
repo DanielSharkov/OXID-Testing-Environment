@@ -1,0 +1,284 @@
+// COLORS ----------------------------------------------------------------------
+	// Red
+		$RedWhite		 = #ffbcaf
+		$RedLight		 = #ff5131
+		$Red			 = #d50000
+		$RedDark		 = #9b0000
+
+	// Pink
+		$PinkWhite		 = #ffb2dd
+		$PinkLight		 = #fd558f
+		$Pink			 = #c51162
+		$PinkDark		 = #8e0038
+
+	// Purple
+		$PurpleWhite	 = #ffb2ff
+		$PurpleLight	 = #e254ff
+		$Purple			 = #aa00ff
+		$PurpleDark		 = #7200ca
+
+	// DeepPurple
+		$DeepPurpleWhite = #e7b9ff
+		$DeepPurpleLight = #9d46ff
+		$DeepPurple		 = #6200ea
+		$DeepPurpleDark	 = #0a00b6
+
+	// Indigo
+		$IndigoWhite	 = #c0cfff
+		$IndigoLight	 = #7a7cff
+		$Indigo			 = #304ffe
+		$IndigoDark		 = #0026ca
+
+	// Blue
+		$BlueWhite		 = #b6e3ff
+		$BlueLight		 = #768fff
+		$Blue			 = #2962ff
+		$BlueDark		 = #0039cb
+
+	// LightBlue
+		$LightBlueWhite	 = #b5ffff
+		$LightBlueLight	 = #64c1ff
+		$LightBlue		 = #0091ea
+		$LightBlueDark	 = #0064b7
+
+	// Cyan
+		$CyanWhite		 = #baffff
+		$CyanLight		 = #62ebff
+		$Cyan			 = #00b8d4
+		$CyanDark		 = #0088a3
+
+	// Teal
+		$TealWhite		 = #dbffff
+		$TealLight		 = #5df2d6
+		$Teal			 = #00bfa5
+		$TealDark		 = #008e76
+
+	// Green
+		$GreenWhite		 = #ecfffd
+		$GreenLight		 = #5efc82
+		$Green			 = #00c853
+		$GreenDark		 = #009624
+
+	// LightGreen
+		$LightGreenWhite = #ffffc2
+		$LightGreenLight = #9cff57
+		$LightGreen		 = #64dd17
+		$LightGreenDark	 = #1faa00
+
+	// Lime
+		$LimeWhite		 = #ffffb3
+		$LimeLight		 = #e4ff54
+		$Lime			 = #aeea00
+		$LimeDark		 = #79b700
+
+	// Yellow
+		$YellowWhite	 = #ffffbf
+		$YellowLight	 = #ffff52
+		$Yellow			 = #ffd600
+		$YellowDark		 = #c7a500
+
+	// Amber
+		$AmberWhite		 = #ffffb0
+		$AmberLight		 = #ffdd4b
+		$Amber			 = #ffab00
+		$AmberDark		 = #c67c00
+
+	// Orange
+		$OrangeWhite	 = #ffffb1
+		$OrangeLight	 = #ff9e40
+		$Orange			 = #ff6d00
+		$OrangeDark		 = #c43c00
+
+	// DeepOrange
+		$DeepOrangeWhite = #ffd0b0
+		$DeepOrangeLight = #ff6434
+		$DeepOrange		 = #dd2c00
+		$DeepOrangeDark	 = #a30000
+
+	// Brown
+		$BrownWhite		 = #d3b8ae
+		$BrownLight		 = #9c786c
+		$Brown			 = #6d4c41
+		$BrownDark		 = #40241a
+
+	// BlueGrey
+		$BlueGreyWhite	 = #edf3f8
+		$BlueGreyLight	 = #455a64
+		$BlueGrey		 = #263238
+		$BlueGreyDark	 = #000a12
+
+	// Theme colors
+		$primary = $BlueLight
+
+	// Theme mode contrasts
+		$LightThemeBG = #fafaff
+		$LightThemeBGContrast = #f4f4fb
+		$LightThemeBGContrastBright = #ececf4
+
+		$DarkThemeBG = #0b1013
+		$DarkThemeBGContrast = #131b20
+		$DarkThemeBGContrastBright = #1d2830
+
+// FONT CONFIG -----------------------------------------------------------------
+	// Size
+	$BasicFS = 1rem
+
+	$HeadingFS1 = 2.25rem
+	$HeadingFS2 = 2rem
+	$HeadingFS3 = 1.75rem
+	$HeadingFS4 = 1.5rem
+	$HeadingFS5 = 1.25rem
+	$HeadingFS6 = 1.1rem
+
+	$DisplayFS1 = 6rem
+	$DisplayFS2 = 5rem
+	$DisplayFS3 = 4rem
+	$DisplayFS4 = 3rem
+
+	$SmallFS1 = .85rem
+	$SmallFS2 = .75rem
+	$SmallFS3 = .65rem
+	$SmallFS4 = .5rem
+
+	// Color
+	$FontColorDark = #000
+	$FontColorLight = #fff
+
+	$BrightFontColorDark = rgba(#000, .3)
+	$BrightFontColorLight = rgba(#fff, .3)
+
+	$ThinFW()
+		font-weight: 100
+	$LightFW()
+		font-weight: 300
+	$DefaultFW()
+		font-weight: 400
+	$MediumFW()
+		font-weight: 500
+	$SemiBoldFW()
+		font-weight: 600
+	$BoldFW()
+		font-weight: 700
+	$BolderFW()
+		font-weight: 900
+
+// TRANSITION / ANIMATION CONFIG -----------------------------------------------
+	$Transition()
+		-webkit-transition: arguments
+		-moz-transition: arguments
+		-o-transition: arguments
+		transition: arguments
+
+	$TransitionDuration()
+		-webkit-transition-duration: arguments
+		-moz-transition-duration: arguments
+		-o-transition-duration: arguments
+		transition-duration: arguments
+
+	$Animation()
+		-webkit-animation: arguments
+		-moz-animation: arguments
+		-o-animation: arguments
+		animation: arguments
+
+	$SmoothAnimation()
+		-webkit-transform: translate(0,0)
+		-moz-transform: translate(0,0)
+		-o-transform: translate(0,0)
+		transform: translate(0,0)
+
+	// Transition functions
+	$OutCubic = cubic-bezier(.22, .61, .36, 1)
+	$InOutCubic = cubic-bezier(.65, .05, .36, 1)
+
+// FLEX CONFIG -----------------------------------------------------------------
+	$DisplayFlex()
+		display: -webkit-box
+		display: -moz-box
+		display: -ms-flexbox
+		display: -webkit-flex
+		display: flex
+
+	$AlignContent()
+		justify-content: arguments
+		align-content: arguments
+		align-items: arguments
+
+// DROP SHADOW CONFIG ----------------------------------------------------------
+	$DropShadow(stage, theme)
+		if theme is 'light'
+			$border = rgba(#000, .05)
+			$shadow = rgba(#000, .1 + (.002 * stage))
+		else if theme is 'dark'
+			$border = rgba(#000, .25)
+			$shadow = rgba(#000, .45 + (.0025 * stage))
+		box-shadow:
+			0 .05rem .25rem .05rem $border,
+			0 .05rem * stage .1rem * stage $shadow
+
+// GENERAL CONFIG --------------------------------------------------------------
+	$DividerDark = rgba($DarkThemeBG, .15)
+	$DividerLight = rgba($LightThemeBG, .15)
+
+	$BasicRadius = .25rem
+
+	$CenterBGImage()
+		background-position: center
+		background-repeat: no-repeat
+		background-size: cover
+
+	$SetFilter()
+		-webkit-filter: arguments
+		-moz-filter: arguments
+		-o-filter: arguments
+		-ms-filter: arguments
+		filter: arguments
+
+	$TextSelect()
+		-webkit-touch-callout: arguments
+		-webkit-user-select: arguments
+		-khtml-user-select: arguments
+		-moz-user-select: arguments
+		-ms-user-select: arguments
+		user-select: arguments
+
+	$FancyCircleBorder(height, fstColor, fstOpacity, scdColor, scdOpacity)
+		box-shadow:
+			0 0 0 ((height / 10)/ 2.5) rgba(fstColor, fstOpacity),
+			0 0 0 (height / 6) rgba(scdColor, scdOpacity)
+	/*	Example
+		$FancyCircleBorder(
+			<height>,
+			<first border color>, <first border opacity>,
+			<secound border color>, <secound border opacity>,
+		)
+	*/
+
+	$EaseGradient(start, end)
+		background: -moz-linear-gradient(
+			bottom,
+			rgba(start, 1) 0%,
+			rgba(start, .95) 4.5%,
+			rgba(start, .8) 12%,
+			rgba(start, .65) 20%,
+			rgba(start, .5) 40%,
+			rgba(end, .1) 100%
+		)
+		background: -webkit-linear-gradient(
+			bottom,
+			rgba(start, 1) 0%,
+			rgba(start, .95) 4.5%,
+			rgba(start, .8) 12%,
+			rgba(start, .65) 20%,
+			rgba(start, .5) 40%,
+			rgba(end, .1) 100%
+		)
+		background: linear-gradient(
+			to top,
+			rgba(start, 1) 0%,
+			rgba(start, .95) 4.5%,
+			rgba(start, .8) 12%,
+			rgba(start, .65) 20%,
+			rgba(start, .5) 40%,
+			rgba(end, .1) 100%
+		)
