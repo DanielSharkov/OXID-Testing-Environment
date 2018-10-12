@@ -14,9 +14,17 @@
 	display: flex;
 	flex-flow: row wrap;
 	filter: drop-shadow(0 0 4px rgba(0,0,0,.5));
+	z-index: 1;
+	pointer-events: none;
 }
+
+.banner-info > * {
+	pointer-events: all;
+}
+
 /* Banner title */
-.banner-info h1 {
+.banner-info .title {
+	margin-bottom: 1rem;
 	color: #fff;
 	flex: 1 1 100%;
 }
@@ -25,44 +33,44 @@
 /* Left alignments */
 .banner-info.left_top {
 	top: 2rem;
-	left: 8rem;
+	left: 6rem;
 	justify-content: flex-start;
 }
 .banner-info.left_centered {
 	align-self: center;
-	left: 8rem;
+	left: 6rem;
 	justify-content: flex-start;
 }
 .banner-info.left_bottom {
-	bottom: 4rem;
-	left: 8rem;
+	bottom: 2rem;
+	left: 6rem;
 	justify-content: flex-start;
 }
-.banner-info.left_top > h1,
-.banner-info.left_centered > h1,
-.banner-info.left_bottom > h1 {
+.banner-info.left_top > .title,
+.banner-info.left_centered > .title,
+.banner-info.left_bottom > .title {
 	text-align: left;
 }
 
 /* Right alignments */
 .banner-info.right_top {
 	top: 2rem;
-	right: 8rem;
+	right: 6rem;
 	justify-content: flex-end;
 }
 .banner-info.right_centered {
 	align-self: center;
-	right: 8rem;
+	right: 6rem;
 	justify-content: flex-end;
 }
 .banner-info.right_bottom {
-	bottom: 4rem;
-	right: 8rem;
+	bottom: 2rem;
+	right: 6rem;
 	justify-content: flex-end;
 }
-.banner-info.right_top > h1,
-.banner-info.right_centered > h1,
-.banner-info.right_bottom > h1 {
+.banner-info.right_top > .title,
+.banner-info.right_centered > .title,
+.banner-info.right_bottom > .title {
 	text-align: right;
 }
 
@@ -78,21 +86,21 @@
 	justify-content: center;
 }
 .banner-info.bottom_centered {
-	bottom: 4rem;
+	bottom: 2rem;
 	justify-self: center;
 	justify-content: center;
 }
-.banner-info.top_centered > h1,
-.banner-info.centered > h1,
-.banner-info.bottom_centered > h1 {
+.banner-info.top_centered > .title,
+.banner-info.centered > .title,
+.banner-info.bottom_centered > .title {
 	text-align: center;
 }
 
 /* Banner button */
 .banner-info .banner-button {
-	padding: 1rem 4rem;
-	border-radius: .5rem;
-	border: solid .2rem;
+	padding: .5rem 2rem;
+	border-radius: .25rem;
+	border: solid .1rem;
 	background: none;
 	font-size: 1.5rem;
 	outline: none;
@@ -111,6 +119,8 @@
 	height: 100%;
 	width: 100%;
 	background-color: rgba(0,0,0,.2);
+	pointer-events: none;
+	z-index: 1;
 }
 </style>
 
@@ -127,9 +137,11 @@
 					[{if $sBannerPictureUrl}]
 						<li class="item">
 							<div class="banner-info [{$oBanner->oxactions__ox_banner_info_align->value}]">
-								<h1 style="color: [{$oBanner->oxactions__ox_button_color->value}]">
+								<h3
+								class="title"
+								style="color: [{$oBanner->oxactions__ox_button_color->value}]">
 									[{$oBanner->oxactions__oxtitle->value}]
-								</h1>
+								</h3>
 								<button class="banner-button" style="
 									border-color: [{$oBanner->oxactions__ox_button_color->value}];
 									color: [{$oBanner->oxactions__ox_button_color->value}];
