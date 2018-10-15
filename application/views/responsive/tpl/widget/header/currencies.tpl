@@ -3,16 +3,29 @@
     <div class="btn-group currencies-menu">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
             [{block name="dd_layout_page_header_icon_menu_currencies_button"}]
-                [{$currency->name}] <i class="fa fa-angle-down"></i>
+                <span>
+                    [{$currency->name}]
+                </span>
+                <i class="icon material-icons">keyboard_arrow_down</i>
             [{/block}]
         </button>
-        <div class="grid dropdown-menu dropdown-menu-right align-right-top expand-down" role="menu">
+        <div
+        class="
+            grid
+            dropdown-menu
+            drop-shadow-25
+            dropdown-menu-right
+            align-right-top
+            expand-down
+        "
+        role="menu">
             [{block name="dd_layout_page_header_icon_menu_currencies_list"}]
                 [{foreach from=$oxcmp_cur item=_cur}]
                     [{if $_cur->selected}]
                         [{assign var="selectedCurrency" value=$_cur->name}]
                         [{capture name="currencySelected"}]
                             <a
+                            class="option"
                             href="[{$_cur->link|oxaddparams:$oView->getDynUrlParams()}]"
                             title="[{$_cur->name}]">
                                 <span>[{$_cur->name}]</span>
@@ -20,7 +33,7 @@
                         [{/capture}]
                     [{/if}]
                     <a
-                    [{if $_cur->selected}] class="active"[{/if}]
+                    class="option [{if $_cur->selected}]active[{/if}]"
                     href="[{$_cur->link|oxaddparams:$oView->getDynUrlParams()}]"
                     title="[{$_cur->name}]">
                         [{$_cur->name}]

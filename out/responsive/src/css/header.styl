@@ -1,9 +1,41 @@
-header
+@import 'global_variables'
+
+.theme-light header
 	background-color: #fff
+	.menu-dropdowns .minibasket-menu
+		.items-list .basket-item
+			&:hover
+				background-color: rgba($DarkThemeBG, .05)
+			&:after
+				background-color: rgba($DarkThemeBG, .1)
+		.options
+			border-color: rgba($DarkThemeBG, .1)
+.theme-dark header
+	background-color: $DarkThemeBG
+	.menu-dropdowns .minibasket-menu
+		.items-list .basket-item
+			&:hover
+				background-color: rgba($LightThemeBG, .05)
+			&:after
+				background-color: rgba($LightThemeBG, .1)
+		.options
+			border-color: rgba($LightThemeBG, .1)
+
+header
+	position: sticky
+	top: 0
+	flex: 0 0 auto
+	z-index: 100
 
 	.header-top
-		padding: 2rem
-		// .brand
+		padding: 1rem
+		.brand img
+			height: 100%
+			max-height: 5rem
+		.dropdown-menu
+			margin: .5rem
+			a
+				flex-flow: row nowrap
 
 	.menu-dropdowns
 		flex: 0 0 auto
@@ -14,59 +46,168 @@ header
 				display: inline-block
 		.minibasket-menu
 			margin: 0 1rem
-		.dropdown-menu
-			min-width: 40px
-		table .badge
-			background-color: #FC6621
-			position: absolute
-			top: 3px
-			right: 3px
-			font-weight: 500
-		// .btn-group
-			
-
-	.service-menu
-		&.showLogin .dropdown-menu
-			min-width: 480px
-		.dropdown-menu
-			padding: 1rem
-			flex-flow: row nowrap
-			// #services
-
+			.dropdown-menu
+				width: 30rem
+				padding: 0
+				> *
+					flex: 1 1 100%
+				.empty-basket
+					padding: 1rem
+			.title
+				margin: 1rem 1rem 0 1rem
+				.count
+					margin: .5rem 1rem
+					box-shadow: 0 0 0 .25rem rgba($primary, .2)
+					background-color: $primary
+					color: #fff
+			.title .count, .items-list .basket-item .amount
+				$DisplayFlex()
+				width: 1.25rem
+				height: @width
+				$AlignContent(center)
+				font-size: $SmallFS3
+				$BoldFW()
+				border-radius: 50%
+			.items-list
+				padding: 1rem
+				.basket-item
+					position: relative
+					padding: 1rem
+					flex: 1 1 100%
+					border-radius: $BasicRadius
+					flex-flow: row nowrap
+					align-items: flex-start
+					&:last-child
+						border: none
+					&:after
+						content: ''
+						position: absolute
+						left: 5%
+						bottom: -1px
+						height: 1px
+						width: 90%
+					&:last-child:after
+						content: none
+					.amount
+						position: absolute
+						top: 1rem
+						right: @top
+						flex: 0 0 auto
+						color: $primary
+						background-color: rgba($primary, .2)
+					.picture
+						width: 4rem
+						height: @width
+						margin-right: 1rem
+						flex: 0 0 auto
+						border-radius: $BasicRadius
+					.details
+						flex: 1 1 auto
+						> *
+							flex: 1 1 auto
+						.name
+							padding-right: 2.5rem
+							flex: 1 1 100%
+							$SemiBoldFW()
+							font-size: $SmallFS1
+						// .price
+					.remove
+						position: absolute
+						bottom: 1rem
+						right: 1rem
+						opacity: .15
+						&:hover
+							opacity: 1
+							.icon
+								color: $Red
+						.icon
+							font-size: $SmallFS2
+			.options
+				margin: 0 1rem 1rem 1rem
+				padding-top: 1rem
+				border-top: solid 1px
+				justify-content: space-between
+		.service-menu
+			&.showLogin .dropdown-menu
+				min-width: 480px
+			.dropdown-menu
+				padding: 0
+				flex-flow: row nowrap
+				align-items: flex-start
+				> *
+					padding: 1rem
+					flex: 1 1 100%
+				#services > a
+					padding: .5rem 1rem
+					flex: 1 1 100%
+				.login-form
+					justify-content: space-between
+					.default-input
+						flex: 1 1 100%
+					.default-input, #remember-checkbox
+						margin-bottom: 1rem
+					.btn
+						padding: .5rem
+					#remember-checkbox
+						flex: 1 1 100%
+						input
+							margin: .5rem
+					label
+						font-size: $BasicFS
 
 	.shopping-bag
-		height: 24px
-		width: 24px
+		$Transition(all $OutCubic 200ms)
+		svg
+			height: 24px
+			width: @height
+			$Transition(all $OutCubic 200ms)
 		&:not(.filled)
 			opacity: .2
 			color: #000
 		&:hover
 			opacity: 1
-		&.filled
+		&:active, &:focus
 			opacity: 1
-			color: rgb(0,125,255)
+			svg
+				color: $primary
+		&.filled svg
+			opacity: 1
+			color: $primary
 		&-mini
 			height: 25px
 			width: 25px
 			margin: -5px 0
 			color: #009EC0
-		&.filled
-			color: #FC6621
+		&:focus svg
+			fill: $primary
 
 	#mainnav
-		.nav > a
-			color: red
+		padding: .25rem 1rem
+		flex: 1 1 100%
 
 		.fixed-header-actions
 			display: none
 
 		.navbar-toggle
 			float: none
+		
+		#navigation
+			> *
+				margin: .5rem
+			.dropdown.active .btn
+				color: #fff !important
+				background-color: $primary !important
+				> *
+					color: #fff !important
 
-	.dropdown-menu
-		margin: .5rem
-		a
-			flex-flow: row nowrap
+		.search-col
+			position: relative
+			margin: .5rem .5rem .5rem auto
+			.submit-search
+				position: absolute
+				right: 0
+				top: 0
+				padding: .35rem
 
 	.languages-menu
 		.name
