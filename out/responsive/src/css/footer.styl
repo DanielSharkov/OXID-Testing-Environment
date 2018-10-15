@@ -1,0 +1,65 @@
+@import 'global_variables'
+
+#app footer
+	margin-top: 4rem
+	padding: 4rem
+	flex: 0 0 auto
+	@media screen and (max-width: 768px)
+		padding: 2rem
+	> *
+		flex: 1 1 100%
+		align-items: stretch
+		section
+			flex: 1 1 (100% / 4)
+			$AlignContent(flex-start)
+			@media screen and (max-width: 768px)
+				flex: 0 1 (100% / 2)
+			.title, .links
+				flex: 1 1 100%
+			.title
+				margin-bottom: .5rem
+			.links > a
+				$DisplayFlex()
+				flex: 1 1 100%
+				align-items: center
+				font-size: $SmallFS1
+				&:before
+					content: ''
+					display: inline-block
+					width: 0rem
+					height .1rem
+					margin-right: 0rem
+					background-color: $primary
+				&:hover
+					color: $primary
+					&:before
+						width: .5rem
+						margin-right: .5rem
+
+	.links .badge
+		$DisplayFlex()
+		width: 1rem
+		height: @width
+		margin: 0 .5rem
+		$AlignContent(center)
+		font-size: $SmallFS3
+		$BoldFW()
+		border-radius: 50%
+		background-color: rgba($primary, .2)
+		color: $primary
+		font-size: $SmallFS4
+
+	> .grid
+		margin-bottom: 1rem
+
+	#incVatInfo .deliveryInfo
+		font-size: $SmallFS2
+		> a
+			font-size: $SmallFS2
+			color: $primary
+			&:hover
+				text-decoration: underline
+
+	.legal
+		span
+			font-size: $SmallFS2
