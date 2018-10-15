@@ -1,82 +1,58 @@
 [{capture append="oxidBlock_pageBody"}]
-    [{if $oView->showRDFa()}]
-        [{include file="rdfa/rdfa.tpl"}]
-    [{/if}]
+	[{if $oView->showRDFa()}]
+		[{include file="rdfa/rdfa.tpl"}]
+	[{/if}]
 
-    [{block name="layout_header"}]
-        [{include file="layout/header.tpl"}]
-    [{/block}]
+	[{block name="layout_header"}]
+		[{include file="layout/header.tpl"}]
+	[{/block}]
 
-    [{assign var="blFullwidth" value=$oViewConf->getViewThemeParam('blFullwidthLayout')}]
+	[{block name="article_styles"}]
+		[{oxstyle include="css/article.css"}]
+	[{/block}]
 
-    <div id="wrapper" [{if $sidebar}]class="sidebar[{$sidebar}]"[{/if}]>
+	<article class="grid">
+		[{if $oView->getClassName()=='start' && $oView->getBanners()|@count > 0}]
+			[{include file="widget/promoslider.tpl"}]
+		[{/if}]
 
-        <div class="[{if $blFullwidth}]container[{else}]container-fluid[{/if}]">
+		[{if $oView->getClassName() != "start" && !$blHideBreadcrumb}]
+			[{block name="layout_breadcrumb"}]
+				[{include file="widget/breadcrumb.tpl"}]
+			[{/block}]
+		[{/if}]
 
-            <div class="underdog">
+		[{$smarty.capture.loginErrors}]
 
-                <div class="row">
+		[{if $sidebar && $sidebar != "Right"}]
+			<div class="col-xs-12 col-md-3 [{$oView->getClassName()}]">
+				<div id="sidebar">
+					[{include file="layout/sidebar.tpl"}]
+				</div>
+			</div>
+		[{/if}]
 
-                    [{if $oView->getClassName()=='start' && $oView->getBanners()|@count > 0}]
-                        [{include file="widget/promoslider.tpl"}]
-                    [{/if}]
+		[{block name="content_main"}]
+			[{include file="message/errors.tpl"}]
 
-                </div>
+			[{foreach from=$oxidBlock_content item="_block"}]
+				[{$_block}]
+			[{/foreach}]
+		[{/block}]
 
-                <div class="content-box">
+		[{if $sidebar && $sidebar == "Right"}]
+			<div class="col-xs-12 col-md-3 [{$oView->getClassName()}]">
+				<div id="sidebar">
+					[{include file="layout/sidebar.tpl"}]
+				</div>
+			</div>
+		[{/if}]
+	</article>
 
-                    [{if $oView->getClassName() != "start" && !$blHideBreadcrumb}]
-                        [{block name="layout_breadcrumb"}]
-                            [{include file="widget/breadcrumb.tpl"}]
-                        [{/block}]
-                    [{/if}]
+	[{include file="layout/footer.tpl"}]
 
-                    [{$smarty.capture.loginErrors}]
+	[{include file="widget/facebook/init.tpl"}]
 
-                    <div class="row">
-                        [{if $sidebar && $sidebar != "Right"}]
-                            <div class="col-xs-12 col-md-3 [{$oView->getClassName()}]">
-                                <div id="sidebar">
-                                    [{include file="layout/sidebar.tpl"}]
-                                </div>
-                            </div>
-                        [{/if}]
-
-                        <div class="col-xs-12 [{if $sidebar}]col-md-9[{/if}]">
-
-                            <div id="content">
-                                [{block name="content_main"}]
-                                    [{include file="message/errors.tpl"}]
-
-                                    [{foreach from=$oxidBlock_content item="_block"}]
-                                        [{$_block}]
-                                    [{/foreach}]
-                                [{/block}]
-                            </div>
-
-                        </div>
-
-                        [{if $sidebar && $sidebar == "Right"}]
-                            <div class="col-xs-12 col-md-3 [{$oView->getClassName()}]">
-                                <div id="sidebar">
-                                    [{include file="layout/sidebar.tpl"}]
-                                </div>
-                            </div>
-                        [{/if}]
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    [{include file="layout/footer.tpl"}]
-
-    [{include file="widget/facebook/init.tpl"}]
-
-    <i class="fa fa-chevron-circle-up icon-4x" id="jumptotop"></i>
+	<i class="fa fa-chevron-circle-up icon-4x" id="jumptotop"></i>
 [{/capture}]
 [{include file="layout/base.tpl"}]

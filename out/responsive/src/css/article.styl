@@ -1,0 +1,74 @@
+@import 'global_variables'
+
+#app article
+	min-height: calc(100vh - 13rem)
+	flex: 1 0 auto
+	$AlignContent(flex-start)
+	> *
+		flex: 1 1 100%
+	.heading
+		padding: 5rem
+		flex-flow: row wrap
+		text-align: center
+		@media screen and (max-width: 768px)
+			padding: 2rem
+		.title
+			$AlignContent(center)
+			.subhead
+				flex: 1 1 100%
+			.rss
+				width: 1rem
+				height: @width
+				margin: 1rem
+				&:hover .fa
+					color: $primary
+		> *
+			flex: 1 1 100%
+	.list-container
+		padding: 2rem
+		align-items: stretch
+		@media screen and (max-width: 768px)
+			padding: 0
+		> *
+			padding: 1rem
+			flex: 0 1 (100% / 3)
+			border-radius: $BasicRadius
+			@media screen and (max-width: 1200px)
+				flex: 0 1 (100% / 2)
+			@media screen and (max-width: 768px)
+				padding: 0
+				flex: 0 1 100%
+		&.infogridView .productBox
+			form
+				flex-flow: row nowrap
+				align-items: flex-start
+			.listDetails
+				padding: 1rem
+				flex: 1 1 auto
+				> *
+					flex: 1 1 100%
+					margin-bottom: .5rem
+					&:last-child
+						margin: 0
+			.picture
+				width: 100px
+				height: @width
+				padding: 1rem
+				flex: 0 0 @width
+				img
+					height: 100%
+			.name
+				$SemiBoldFW()
+			.shortdesc
+				font-size: $SmallFS2
+			.price
+				.oldPrice
+					margin-right: .5rem
+					font-style: italic
+					opacity: .5
+			.actions
+				align-items: stretch
+				> *:first-child
+					margin-right: .5rem
+			.selectbox
+				position: relative
